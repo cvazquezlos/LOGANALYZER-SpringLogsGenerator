@@ -4,15 +4,19 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.Test;
 
 public class PasswordGeneratorTest {
+    private static final Logger logger = LoggerFactory.getLogger(PasswordGeneratorTest.class);
 
 	@Test
 	public void checkRegionalChars(){
 		PasswordGenerator tester = new PasswordGenerator(new Index(), new String[]{"12", "Medium", "false", "true", "false", "US / UK"});
 		PasswordGenerator tester2 = new PasswordGenerator(new Index(), new String[]{"8", "Advanced", "true", "true", "true", "SP"});
 		
+		logger.info("tester;regionChars must contain US / UK regional chars.");
 		assertEquals("tester;regionChars must contain US / UK regional chars.", 0, tester.regionChars.size());
 		assertEquals("tester2;regionChars must contain SP regional chars.", 2, tester2.regionChars.size());
 	}
@@ -53,8 +57,10 @@ public class PasswordGeneratorTest {
 		PasswordGenerator tester2 = new PasswordGenerator(new Index(), new String[]{"8", "Advanced", "true", "true", "true", "SP"});
 		
 		String password = tester.createPassword();
+		String password2 = tester2.createPassword();
 		
-		assertTrue("Password generated and its value is " + password, true);
+		assertTrue("tester;Password generated and its value is " + password, true);
+		assertTrue("tester2;Password generated and its value is " + password2, true);
 	}
 	
 }
