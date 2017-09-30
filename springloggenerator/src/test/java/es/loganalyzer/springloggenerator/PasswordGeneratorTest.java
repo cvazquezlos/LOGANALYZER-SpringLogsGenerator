@@ -4,12 +4,14 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import org.junit.Test;
 
 public class PasswordGeneratorTest {
-    private static final Logger logger = LoggerFactory.getLogger(PasswordGeneratorTest.class);
+
+    private static final Logger logger = LogManager.getLogger(PasswordGeneratorTest.class.getName());
 
 	@Test
 	public void checkRegionalChars(){
