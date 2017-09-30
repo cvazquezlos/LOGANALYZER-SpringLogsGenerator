@@ -86,7 +86,6 @@ public class PasswordGenerator {
 			elements = new String[10];
 			if (numbers && specialChar) {
 				setAllIndex(1);
-				System.out.println(this.gradeLevel);
 				for (int j = 0; j < elements.length; j++) {
 					if (j >= 0 && j < ((int) (index1 * elements.length))) {
 						elements[j] = Integer.toString(generateRandomInt(0, 9));
