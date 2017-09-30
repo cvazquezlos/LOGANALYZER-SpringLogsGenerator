@@ -17,7 +17,7 @@ public class PasswordGeneratorTest {
 	public void checkRegionalChars(){
 		PasswordGenerator tester = new PasswordGenerator(new Index(), new String[]{"12", "Medium", "false", "true", "false", "US / UK"});
 		PasswordGenerator tester2 = new PasswordGenerator(new Index(), new String[]{"8", "Advanced", "true", "true", "true", "SP"});
-		
+
 		assertEquals("tester;regionChars must contain US / UK regional chars.", 0, tester.regionChars.size());
 		logger.info("tester;regionChars must contain US / UK regional chars.");
 		assertEquals("tester2;regionChars must contain SP regional chars.", 2, tester2.regionChars.size());
