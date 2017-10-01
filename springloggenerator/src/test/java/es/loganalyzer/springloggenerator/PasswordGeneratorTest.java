@@ -18,10 +18,10 @@ public class PasswordGeneratorTest {
 		PasswordGenerator tester = new PasswordGenerator(new Index(), new String[]{"12", "Medium", "false", "true", "false", "US / UK"});
 		PasswordGenerator tester2 = new PasswordGenerator(new Index(), new String[]{"8", "Advanced", "true", "true", "true", "SP"});
 
-		assertEquals("tester;regionChars must contain US / UK regional chars.", 0, tester.regionChars.size());
-		logger.info("tester;regionChars must contain US / UK regional chars.");
-		assertEquals("tester2;regionChars must contain SP regional chars.", 2, tester2.regionChars.size());
-		logger.info("tester2;regionChars must contain SP regional chars.");
+		assertEquals("Tester. regionChars must contain US / UK regional chars.", 0, tester.regionChars.size());
+		logger.info("Tester. regionChars must contain US / UK regional chars.");
+		assertEquals("Tester2. regionChars must contain SP regional chars.", 2, tester2.regionChars.size());
+		logger.info("Tester2. regionChars must contain SP regional chars.");
 	}
 	
 	@Test
@@ -29,31 +29,31 @@ public class PasswordGeneratorTest {
 		PasswordGenerator tester = new PasswordGenerator(new Index(), new String[]{"12", "Medium", "false", "true", "false", "US / UK"});
 		PasswordGenerator tester2 = new PasswordGenerator(new Index(), new String[]{"8", "Advanced", "true", "true", "true", "SP"});
 		
-		assertNotNull("tester;first condition;numChat must contain a valid int value.", tester.numChar);
-		logger.info("tester;first condition;numChat must contain a valid int value.");
-		assertNotNull("tester;second condition;secLevel must contain a valid String value.", tester.secLevel);
-		logger.info("tester;second condition;secLevel must contain a valid String value.");
-		assertNotNull("tester;third condition;specialChar must contain a valid boolean value.", tester.specialChar);
-		logger.info("tester;third condition;specialChar must contain a valid boolean value.");
-		assertNotNull("tester;fourth condition;numbers must contain a valid boolean value.", tester.numbers);
-		logger.info("tester;fourth condition;numbers must contain a valid boolean value.");
-		assertNotNull("tester;fifth condition;wantRepeated must contain a valid boolean value.", tester.wantRepeated);
-		logger.info("tester;fifth condition;wantRepeated must contain a valid boolean value.");
-		assertNotNull("tester;fifth condition;regionChar must contain a valid String value.", tester.regionChar);
-		logger.info("tester;fifth condition;regionChar must contain a valid String value.");
+		assertNotNull("Tester. First condition. numChat must contain a valid int value.", tester.numChar);
+		logger.info("Tester. First condition. numChat must contain a valid int value.");
+		assertNotNull("Tester. Second condition. secLevel must contain a valid String value.", tester.secLevel);
+		logger.info("Tester. Second condition. secLevel must contain a valid String value.");
+		assertNotNull("Tester. Third condition. specialChar must contain a valid boolean value.", tester.specialChar);
+		logger.info("Tester. Third condition. specialChar must contain a valid boolean value.");
+		assertNotNull("Tester. Fourth condition. numbers must contain a valid boolean value.", tester.numbers);
+		logger.info("Tester. Fourth condition. numbers must contain a valid boolean value.");
+		assertNotNull("Tester. Fifth condition. wantRepeated must contain a valid boolean value.", tester.wantRepeated);
+		logger.info("Tester. Fifth condition. wantRepeated must contain a valid boolean value.");
+		assertNotNull("Tester. Sixth condition. regionChar must contain a valid String value.", tester.regionChar);
+		logger.info("Tester. Sixth condition. regionChar must contain a valid String value.");
 		
-		assertNotNull("tester2;first condition;numChat must contain a valid int value.", tester2.numChar);
-		logger.info("tester2;first condition;numChat must contain a valid int value.");
-		assertNotNull("tester2;second condition;secLevel must contain a valid String value.", tester2.secLevel);
-		logger.info("tester2;second condition;secLevel must contain a valid String value.");
-		assertNotNull("tester2;third condition;specialChar must contain a valid boolean value.", tester2.specialChar);
-		logger.info("tester2;third condition;specialChar must contain a valid boolean value.");
-		assertNotNull("tester2;fourth condition;numbers must contain a valid boolean value.", tester2.numbers);
-		logger.info("tester2;fourth condition;numbers must contain a valid boolean value.");
-		assertNotNull("tester2;fifth condition;wantRepeated must contain a valid boolean value.", tester2.wantRepeated);
-		logger.info("tester2;fifth condition;wantRepeated must contain a valid boolean value.");
-		assertNotNull("tester2;fifth condition;regionChar must contain a valid String value.", tester2.regionChar);
-		logger.info("tester2;fifth condition;regionChar must contain a valid String value.");
+		assertNotNull("Tester2. First condition. numChat must contain a valid int value.", tester2.numChar);
+		logger.info("Tester2. First condition. numChat must contain a valid int value.");
+		assertNotNull("Tester2. Second condition. secLevel must contain a valid String value.", tester2.secLevel);
+		logger.info("Tester2. Second condition. secLevel must contain a valid String value.");
+		assertNotNull("Tester2. Third condition. specialChar must contain a valid boolean value.", tester2.specialChar);
+		logger.info("Tester2. Third condition. specialChar must contain a valid boolean value.");
+		assertNotNull("Tester2. Fourth condition. numbers must contain a valid boolean value.", tester2.numbers);
+		logger.info("Tester2. Fourth condition. numbers must contain a valid boolean value.");
+		assertNotNull("Tester2. Fifth condition. wantRepeated must contain a valid boolean value.", tester2.wantRepeated);
+		logger.info("Tester2. Fifth condition. wantRepeated must contain a valid boolean value.");
+		assertNotNull("Tester2. Sixth condition. regionChar must contain a valid String value.", tester2.regionChar);
+		logger.info("Tester2. Sixth condition. regionChar must contain a valid String value.");
 	}
 	
 	@Test
@@ -61,10 +61,10 @@ public class PasswordGeneratorTest {
 		PasswordGenerator tester = new PasswordGenerator(new Index(), new String[]{"12", "Medium", "false", "true", "false", "US / UK"});
 		PasswordGenerator tester2 = new PasswordGenerator(new Index(), new String[]{"8", "Advanced", "true", "true", "true", "SP"});
 
-		assertNotNull("tester;secLevel must have an int value in gradeLevel variable.", tester.gradeLevel);
-		logger.info("tester;secLevel must have an int value in gradeLevel variable.");
-		assertNotNull("tester2;secLevel must have an int value in gradeLevel variable.", tester2.gradeLevel);
-		logger.info("tester2;secLevel must have an int value in gradeLevel variable.");
+		assertNotNull("Tester. secLevel must have an int value in gradeLevel variable.", tester.gradeLevel);
+		logger.info("Tester. secLevel must have an int value in gradeLevel variable.");
+		assertNotNull("Tester2. secLevel must have an int value in gradeLevel variable.", tester2.gradeLevel);
+		logger.info("Tester2. secLevel must have an int value in gradeLevel variable.");
 		
 	}
 	
@@ -76,10 +76,10 @@ public class PasswordGeneratorTest {
 		String password = tester.createPassword();
 		String password2 = tester2.createPassword();
 		
-		assertTrue("tester;Password generated and its value is " + password, true);
-		logger.info("tester;Password generated and its value is " + password);
-		assertTrue("tester2;Password generated and its value is " + password2, true);
-		logger.info("tester2;Password generated and its value is " + password2);
+		assertTrue("Tester. Password generated and its value is " + password + ".", true);
+		logger.info("Tester. Password generated and its value is " + password + ".");
+		assertTrue("Tester2. Password generated and its value is " + password2 + ".", true);
+		logger.info("Tester2. Password generated and its value is " + password2 + ".");
 	}
 	
 }
