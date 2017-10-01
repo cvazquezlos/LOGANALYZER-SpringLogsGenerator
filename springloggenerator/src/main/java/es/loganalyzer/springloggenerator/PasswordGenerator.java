@@ -211,5 +211,4 @@ public class PasswordGenerator {
 	private boolean isRepeated(String password, String element) {
 		return password.contains(element);
 	}
-
 }
