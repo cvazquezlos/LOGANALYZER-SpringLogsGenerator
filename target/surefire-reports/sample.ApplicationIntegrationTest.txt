@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: sample.ApplicationIntegrationTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 14.337 sec - in sample.ApplicationIntegrationTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.548 sec - in sample.ApplicationIntegrationTest

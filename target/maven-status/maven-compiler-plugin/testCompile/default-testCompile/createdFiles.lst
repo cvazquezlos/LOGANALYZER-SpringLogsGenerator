@@ -1,0 +1,11 @@
+sample\domain\UserEntityTest.class
+sample\domain\VehicleIdentificationNumberTest.class
+sample\ApplicationIntegrationTest.class
+sample\web\UserVehicleServiceTest.class
+sample\web\UserVehicleControllerTest.class
+sample\domain\UserRepositoryTest.class
+sample\web\UserVehicleControllerApplicationTest.class
+sample\web\UserVehicleControllerHtmlUnitTest.class
+sample\web\UserVehicleControllerSeleniumTest.class
+sample\service\VehicleDetailsJsonTest.class
+sample\service\RemoteVehicleDetailsServiceTest.class
