@@ -1,9 +1,0 @@
-repo.mwb.bak
-.classpath
-repo.mwb
-model.ucls
-/target/classes
-/target/generated-sources
-/target/maven-archiver
-/target/maven-status
-/target/
