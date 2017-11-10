@@ -1,6 +1,7 @@
 package appSpring.model;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 import java.util.ArrayList;
 
@@ -18,10 +19,10 @@ public class UserTest {
 	@Test
 	public void getFirstName() {
 		System.out.println("Starting getFirstName() test...");
-		assertEquals("Firstname must be Carlos", "Carlos", tester.getFirstName());
-		logger.info("Firstname must be Carlos");
-		assertNotEquals("Firstname can't be Lucas", "Lucas", tester.getFirstName());
-		logger.info("Firstname can't be Lucas");
+		assertEquals("Firstname must be Carlos.", "Carlos", tester.getFirstName());
+		logger.info("Firstname must be Carlos.");
+		assertNotEquals("Firstname can't be Lucas.", "Lucas", tester.getFirstName());
+		logger.info("Firstname can't be Lucas.");
 		System.out.println("getFirstName() test finished.");
 	}
 	
@@ -29,8 +30,8 @@ public class UserTest {
 	public void setRoles() {
 		System.out.println("Starting setRoles() test...");
 		tester.setRoles(new ArrayList<>());
-		assertEquals("Roles of user must be empty", 0, tester.getRoles().size());
-		logger.info("Roles of user must be empty");
+		assertEquals("Roles of user must be empty.", 0, tester.getRoles().size());
+		logger.info("Roles of user must be empty.");
 		System.out.println("setRoles() test finished.");
 	}
 }
