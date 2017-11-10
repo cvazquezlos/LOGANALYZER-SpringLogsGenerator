@@ -1,12 +1,9 @@
-# IntelliJ IDEA
-*.iml
-*.ipr
-*.iws
-*.ids
-.idea/
-
-# Maven
-target/
-
-# OS X
-.DS_Store
+repo.mwb.bak
+.classpath
+repo.mwb
+model.ucls
+/target/classes
+/target/generated-sources
+/target/maven-archiver
+/target/maven-status
+/target/
