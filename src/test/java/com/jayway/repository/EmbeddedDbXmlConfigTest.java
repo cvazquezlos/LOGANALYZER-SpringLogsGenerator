@@ -43,19 +43,23 @@ public class EmbeddedDbXmlConfigTest {
 
     @Test
     public void verifyEmbeddedDatabase() {
+		System.out.println("Starting verifyEmbeddedDatabase() method testing...");
         int firstBalance = getBalance(1);
         assertThat(firstBalance, is(100));
 
         int secondBalance = getBalance(2);
         assertThat(secondBalance, is(200));
+		System.out.println("verifyEmbeddedDatabase() method testing finished.");
     }
 
 
     @Test
     public void ormMappingShouldWork() {
+		System.out.println("Starting ormMappingShouldWork() method testing...");
         AccountEntity accountEntity = accountRepository.findOne(1);
 
         assertThat(accountEntity.getAccountNumber(), is(1));
         assertThat(accountEntity.getBalance(), is(100));
+		System.out.println("ormMappingShouldWork() method testing finished.");
     }
 }

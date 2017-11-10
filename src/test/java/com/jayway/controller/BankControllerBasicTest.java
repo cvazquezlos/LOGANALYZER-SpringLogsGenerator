@@ -15,39 +15,38 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BankControllerBasicTest {
-    
-    @Mock
-    AccountService accountServiceMock;
-    
-    @Mock
-    ImmutableAccount immutableAccountMock;
-    
-    @InjectMocks
-    BankController bankController;
 
+	@Mock
+	AccountService accountServiceMock;
 
-    @Test
-    public void shouldGetAccount() {
-        when(accountServiceMock.get(1)).thenReturn(immutableAccountMock);
+	@Mock
+	ImmutableAccount immutableAccountMock;
 
-        ImmutableAccount account = bankController.get(1);
+	@InjectMocks
+	BankController bankController;
 
-        assertThat(account, is(immutableAccountMock));
-    }
+	@Test
+	public void shouldGetAccount() {
+		System.out.println("Starting shouldGetAccount() method testing...");
+		when(accountServiceMock.get(1)).thenReturn(immutableAccountMock);
+		ImmutableAccount account = bankController.get(1);
+		assertThat(account, is(immutableAccountMock));
+		System.out.println("shouldGetAccount() method testing finished.");
+	}
 
+	@Test
+	public void shouldDepositToAccount() {
+		System.out.println("Starting shouldDepositToAccount() method testing...");
+		bankController.deposit(1, new Amount(50));
+		verify(accountServiceMock).deposit(1, 50);
+		System.out.println("shouldDepositToAccount() method testing finished.");
+	}
 
-    @Test
-    public void shouldDepositToAccount() {
-        bankController.deposit(1, new Amount(50));
-
-        verify(accountServiceMock).deposit(1, 50);
-    }
-    
-    
-    @Test
-    public void shouldDeleteAccount() {
-        bankController.delete(1);
-        
-        verify(accountServiceMock).deleteAccount(1);
-    }
+	@Test
+	public void shouldDeleteAccount() {
+		System.out.println("Starting shouldDeleteAccount() method testing...");
+		bankController.delete(1);
+		verify(accountServiceMock).deleteAccount(1);
+		System.out.println("shouldDeleteAccount() method testing finished.");
+	}
 }

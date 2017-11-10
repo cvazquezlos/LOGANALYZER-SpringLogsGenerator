@@ -22,39 +22,35 @@ import static org.junit.Assert.assertThat;
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
 public class AccountRepositoryTest {
 
-    @PersistenceContext
-    EntityManager entityManager;
+	@PersistenceContext
+	EntityManager entityManager;
 
+	@Autowired
+	AccountRepository accountRepository;
 
-    @Autowired
-    AccountRepository accountRepository;
+	@Test
+	public void shouldGetAccountByNumber() {
+		System.out.println("Starting shouldGetAccountByNumber() method testing...");
+		AccountEntity account = accountRepository.findOne(1);
+		assertThat(account.getBalance(), is(100));
+		System.out.println("shouldGetAccountByNumber() method testing finished.");
+	}
 
+	@Test
+	public void newAccountsShouldHaveZeroBalance() {
+		System.out.println("Starting newAccountsShouldHaveZeroBalance() method testing...");
+		AccountEntity account = accountRepository.save(new AccountEntity());
+		entityManager.flush();
+		assertThat(account.getBalance(), is(0));
+		System.out.println("newAccountsShouldHaveZeroBalance() method testing finished.");
+	}
 
-    @Test
-    public void shouldGetAccountByNumber() {
-        AccountEntity account = accountRepository.findOne(1);
-
-        assertThat(account.getBalance(), is(100));
-    }
-
-
-    @Test
-    public void newAccountsShouldHaveZeroBalance() {
-        AccountEntity account = accountRepository.save(new AccountEntity());
-
-        entityManager.flush();
-
-        assertThat(account.getBalance(), is(0));
-    }
-
-
-    @Test
-    public void canDeleteAccount()  {
-        accountRepository.delete(1);
-
-        entityManager.flush();
-
-        assertThat(accountRepository.findOne(1), nullValue());
-    }
-
+	@Test
+	public void canDeleteAccount() {
+		System.out.println("Starting canDeleteAccount() method testing...");
+		accountRepository.delete(1);
+		entityManager.flush();
+		assertThat(accountRepository.findOne(1), nullValue());
+		System.out.println("canDeleteAccount() method testing finished.");
+	}
 }

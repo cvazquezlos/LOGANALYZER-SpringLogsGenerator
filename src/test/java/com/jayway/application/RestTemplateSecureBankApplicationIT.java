@@ -22,40 +22,42 @@ import static org.junit.Assert.assertThat;
 @ActiveProfiles("mysql")
 @WebAppConfiguration
 @IntegrationTest
-@SpringApplicationConfiguration(classes = {SpringBootRunner.class})
+@SpringApplicationConfiguration(classes = { SpringBootRunner.class })
 public class RestTemplateSecureBankApplicationIT {
-
 
 	@Test
 	public void shouldReturnOkIfProvidingGoodCredentials() {
+		System.out.println("Starting shouldReturnOkIfProvidingGoodCredentials() method testing...");
 		RestTemplate restTemplate = new TestRestTemplate("user", "secret");
 
-		ResponseEntity<Map> responseEntity = restTemplate
-				.getForEntity("http://localhost:8080/accounts/{accountNumber}", Map.class, 1);
+		ResponseEntity<Map> responseEntity = restTemplate.getForEntity("http://localhost:8080/accounts/{accountNumber}",
+				Map.class, 1);
 
 		assertThat(responseEntity.getStatusCode(), is(HttpStatus.OK));
+		System.out.println("shouldReturnOkIfProvidingGoodCredentials() method testing finished.");
 	}
 
-
-    @Test
-    public void shouldNotGetAccountIfNotProvidingCredentials() {
+	@Test
+	public void shouldNotGetAccountIfNotProvidingCredentials() {
+		System.out.println("Starting shouldNotGetAccountIfNotProvidingCredentials() method testing...");
 		RestTemplate restTemplate = new TestRestTemplate();
 
 		ResponseEntity<Void> responseEntity = restTemplate
 				.getForEntity("http://localhost:8080/accounts/{accountNumber}", Void.class, 1);
 
 		assertThat(responseEntity.getStatusCode(), is(HttpStatus.UNAUTHORIZED));
-    }
+		System.out.println("shouldNotGetAccountIfNotProvidingCredentials() method testing finished.");
+	}
 
-
-    @Test
-    public void shouldNotGetAccountIfProvidingBadCredentials() {
+	@Test
+	public void shouldNotGetAccountIfProvidingBadCredentials() {
+		System.out.println("Starting shouldNotGetAccountIfProvidingBadCredentials() method testing...");
 		RestTemplate restTemplate = new TestRestTemplate("unknown", "password");
 
 		ResponseEntity<Void> responseEntity = restTemplate
 				.getForEntity("http://localhost:8080/accounts/{accountNumber}", Void.class, 1);
 
 		assertThat(responseEntity.getStatusCode(), is(HttpStatus.UNAUTHORIZED));
-    }
-
+		System.out.println("shouldNotGetAccountIfProvidingBadCredentials() method testing finished.");
+	}
 }

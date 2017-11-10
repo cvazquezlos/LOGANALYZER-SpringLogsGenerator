@@ -20,37 +20,25 @@ import static com.jayway.restassured.RestAssured.when;
 @SpringApplicationConfiguration(classes = SpringBootRunner.class)
 public class RestAssuredSecureBankApplicationIT {
 
-
 	@Test
 	public void shouldReturnOkIfProvidingGoodCredentials() {
-		given().
-				auth().
-					basic("user", "secret").
-        when().
-                get("/accounts/1").
-        then().
-                statusCode(HttpStatus.SC_OK);
+		System.out.println("Starting shouldReturnOkIfProvidingGoodCredentials() method testing...");
+		given().auth().basic("user", "secret").when().get("/accounts/1").then().statusCode(HttpStatus.SC_OK);
+		System.out.println("shouldReturnOkIfProvidingGoodCredentials() method testing finished.");
 	}
 
+	@Test
+	public void shouldNotGetAccountIfNotProvidingCredentials() {
+		System.out.println("Starting shouldNotGetAccountIfNotProvidingCredentials() method testing...");
+		when().get("/accounts/1").then().statusCode(HttpStatus.SC_UNAUTHORIZED);
+		System.out.println("shouldNotGetAccountIfNotProvidingCredentials() method testing finished.");
+	}
 
-    @Test
-    public void shouldNotGetAccountIfNotProvidingCredentials() {
-        when().
-                get("/accounts/1").
-        then().
-                statusCode(HttpStatus.SC_UNAUTHORIZED);
-    }
-
-
-    @Test
-    public void shouldNotGetAccountIfProvidingBadCredentials() {
-        given().
-                auth().
-                    basic("unknown", "password").
-        when().
-                get("/accounts/1").
-        then().
-                statusCode(HttpStatus.SC_UNAUTHORIZED);
-    }
-
+	@Test
+	public void shouldNotGetAccountIfProvidingBadCredentials() {
+		System.out.println("Starting shouldNotGetAccountIfProvidingBadCredentials() method testing...");
+		given().auth().basic("unknown", "password").when().get("/accounts/1").then()
+				.statusCode(HttpStatus.SC_UNAUTHORIZED);
+		System.out.println("shouldNotGetAccountIfProvidingBadCredentials() method testing finished.");
+	}
 }

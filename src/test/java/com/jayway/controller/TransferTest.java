@@ -1,6 +1,5 @@
 package com.jayway.controller;
 
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -15,63 +14,59 @@ import static org.junit.Assert.assertThat;
 
 public class TransferTest {
 
-    static Validator validator;
-    Transfer transfer;
+	static Validator validator;
+	Transfer transfer;
 
+	@BeforeClass
+	public static void beforeClass() {
+		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+		validator = factory.getValidator();
+	}
 
-    @BeforeClass
-    public static void beforeClass() {
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        validator = factory.getValidator();
-    }
+	@Test
+	public void shouldAllowZeroAmount() {
+		System.out.println("Starting shouldAllowZeroAmount() method testing...");
+		transfer = new Transfer(0, 0, 0);
 
+		Set<ConstraintViolation<Transfer>> constraintViolations = validator.validate(transfer);
 
-    @Test
-    public void shouldAllowZeroAmount() {
-        transfer = new Transfer(0, 0, 0);
+		assertThat(constraintViolations.size(), is(0));
+		System.out.println("shouldAllowZeroAmount() method testing finished.");
+	}
 
-        Set<ConstraintViolation<Transfer>> constraintViolations =
-                validator.validate(transfer);
+	@Test
+	public void shouldNotAllowNegativeAmount() {
+		System.out.println("Starting shouldNotAllowNegativeAmount() method testing...");
+		transfer = new Transfer(0, 0, -1);
 
-        assertThat(constraintViolations.size(), is(0));
-    }
+		Set<ConstraintViolation<Transfer>> constraintViolations = validator.validate(transfer);
 
+		assertThat(constraintViolations.size(), is(1));
+		assertThat(constraintViolations.iterator().next().getMessage(), is("Amount must be >= 0"));
+		System.out.println("shouldNotAllowNegativeAmount() method testing finished.");
+	}
 
-    @Test
-    public void shouldNotAllowNegativeAmount() {
-        transfer = new Transfer(0, 0, -1);
+	@Test
+	public void shouldHaveFromAccountNumber() {
+		System.out.println("Starting shouldHaveFromAccountNumber() method testing...");
+		transfer = new Transfer(null, 0, 0);
 
-        Set<ConstraintViolation<Transfer>> constraintViolations =
-                validator.validate(transfer);
+		Set<ConstraintViolation<Transfer>> constraintViolations = validator.validate(transfer);
 
-        assertThat(constraintViolations.size(), is(1));
-        assertThat(constraintViolations.iterator().next().getMessage(),
-                is("Amount must be >= 0"));
-    }
+		assertThat(constraintViolations.size(), is(1));
+		assertThat(constraintViolations.iterator().next().getMessage(), is("From account number must be set"));
+		System.out.println("shouldHaveFromAccountNumber() method testing finished.");
+	}
 
+	@Test
+	public void shouldHaveToAccountNumber() {
+		System.out.println("Starting shouldHaveToAccountNumber() method testing...");
+		transfer = new Transfer(0, null, 0);
 
-    @Test
-    public void shouldHaveFromAccountNumber() {
-        transfer = new Transfer(null, 0, 0);
+		Set<ConstraintViolation<Transfer>> constraintViolations = validator.validate(transfer);
 
-        Set<ConstraintViolation<Transfer>> constraintViolations =
-                validator.validate(transfer);
-
-        assertThat(constraintViolations.size(), is(1));
-        assertThat(constraintViolations.iterator().next().getMessage(),
-                is("From account number must be set"));
-    }
-
-
-    @Test
-    public void shouldHaveToAccountNumber() {
-        transfer = new Transfer(0, null, 0);
-
-        Set<ConstraintViolation<Transfer>> constraintViolations =
-                validator.validate(transfer);
-
-        assertThat(constraintViolations.size(), is(1));
-        assertThat(constraintViolations.iterator().next().getMessage(),
-                is("To account number must be set"));
-    }
+		assertThat(constraintViolations.size(), is(1));
+		assertThat(constraintViolations.iterator().next().getMessage(), is("To account number must be set"));
+		System.out.println("shouldHaveToAccountNumber() method testing finished.");
+	}
 }

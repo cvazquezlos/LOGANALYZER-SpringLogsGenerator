@@ -24,116 +24,125 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {ApplicationConfig.class, SecurityConfig.class})
+@ContextConfiguration(classes = { ApplicationConfig.class, SecurityConfig.class })
 // @ContextConfiguration({"/application-context.xml", "/security-context.xml"})
 @ActiveProfiles("h2")
 @Transactional
 public class SecureAccountServiceImplTest {
 
-    @Autowired
-    AccountService secureAccountService;
+	@Autowired
+	AccountService secureAccountService;
 
+	@Before
+	public void setUp() {
+		SecurityContextHolder.clearContext();
+	}
 
-    @Before
-    public void setUp() {
-        SecurityContextHolder.clearContext();
-    }
+	@Test
+	public void accountOwnerShouldGetAccount() {
+		System.out.println("Starting accountOwnerShouldGetAccount() method testing...");
+		List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ACCOUNT_OWNER");
+		authenticateWithAuthorities(authorities);
 
+		Account account = secureAccountService.get(1);
 
-    @Test
-    public void accountOwnerShouldGetAccount() {
-        List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ACCOUNT_OWNER");
-        authenticateWithAuthorities(authorities);
+		assertThat(account, notNullValue());
+		System.out.println("accountOwnerShouldGetAccount() method testing finished.");
+	}
 
-        Account account = secureAccountService.get(1);
+	@Test(expected = AccessDeniedException.class)
+	public void unAuthorizedShouldNotGetAccount() {
+		System.out.println("Starting unAuthorizedShouldNotGetAccount() method testing...");
+		authenticateWithAuthorities(AuthorityUtils.NO_AUTHORITIES);
 
-        assertThat(account, notNullValue());
-    }
+		secureAccountService.get(1);
+		System.out.println("unAuthorizedShouldNotGetAccount() method testing finished.");
+	}
 
+	@Test
+	public void accountOwnerShouldDeposit() {
+		System.out.println("Starting accountOwnerShouldDeposit() method testing...");
+		List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ACCOUNT_OWNER");
+		authenticateWithAuthorities(authorities);
 
-    @Test(expected = AccessDeniedException.class)
-    public void unAuthorizedShouldNotGetAccount() {
-        authenticateWithAuthorities(AuthorityUtils.NO_AUTHORITIES);
+		secureAccountService.deposit(1, 100);
+		System.out.println("accountOwnerShouldDeposit() method testing finished.");
+	}
 
-        secureAccountService.get(1);
-    }
+	@Test(expected = AccessDeniedException.class)
+	public void unAuthorizedShouldNotDeposit() {
+		System.out.println("Starting unAuthorizedShouldNotDeposit() method testing...");
+		authenticateWithAuthorities(AuthorityUtils.NO_AUTHORITIES);
 
+		secureAccountService.deposit(1, 100);
+		System.out.println("unAuthorizedShouldNotDeposit() method testing finished.");
+	}
 
-    @Test
-    public void accountOwnerShouldDeposit() {
-        List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ACCOUNT_OWNER");
-        authenticateWithAuthorities(authorities);
+	@Test
+	public void accountOwnerShouldWithdraw() {
+		System.out.println("Starting accountOwnerShouldWithdraw() method testing...");
+		List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ACCOUNT_OWNER");
+		authenticateWithAuthorities(authorities);
 
-        secureAccountService.deposit(1, 100);
-    }
+		Account account = secureAccountService.withdraw(1, 50);
 
+		assertThat(account, notNullValue());
+		System.out.println("accountOwnerShouldWithdraw() method testing finished.");
+	}
 
-    @Test(expected = AccessDeniedException.class)
-    public void unAuthorizedShouldNotDeposit() {
-        authenticateWithAuthorities(AuthorityUtils.NO_AUTHORITIES);
+	@Test(expected = AccessDeniedException.class)
+	public void unAuthorizedShouldNotWithdraw() {
+		System.out.println("Starting unAuthorizedShouldNotWithdraw() method testing...");
+		authenticateWithAuthorities(AuthorityUtils.NO_AUTHORITIES);
 
-        secureAccountService.deposit(1, 100);
-    }
+		secureAccountService.withdraw(1, 50);
+		System.out.println("unAuthorizedShouldNotWithdraw() method testing finished.");
+	}
 
+	@Test
+	public void accountOwnerShouldTransfer() {
+		System.out.println("Starting accountOwnerShouldTransfer() method testing...");
+		List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ACCOUNT_OWNER");
+		authenticateWithAuthorities(authorities);
 
-    @Test
-    public void accountOwnerShouldWithdraw() {
-        List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ACCOUNT_OWNER");
-        authenticateWithAuthorities(authorities);
+		secureAccountService.transfer(1, 2, 10);
+		System.out.println("accountOwnerShouldTransfer() method testing finished.");
+	}
 
-        Account account = secureAccountService.withdraw(1, 50);
+	@Test(expected = AccessDeniedException.class)
+	public void unAuthorizedShouldNotTransfer() {
+		System.out.println("Starting unAuthorizedShouldNotTransfer() method testing...");
+		authenticateWithAuthorities(AuthorityUtils.NO_AUTHORITIES);
 
-        assertThat(account, notNullValue());
-    }
+		secureAccountService.transfer(1, 2, 10);
+		System.out.println("unAuthorizedShouldNotTransfer() method testing finished.");
+	}
 
+	@Test
+	public void accountOwnerShouldGetAllAccountNumbers() {
+		System.out.println("Starting accountOwnerShouldGetAllAccountNumbers() method testing...");
+		List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ACCOUNT_OWNER");
+		authenticateWithAuthorities(authorities);
 
-    @Test(expected = AccessDeniedException.class)
-    public void unAuthorizedShouldNotWithdraw() {
-        authenticateWithAuthorities(AuthorityUtils.NO_AUTHORITIES);
+		List<Integer> allAccounts = secureAccountService.getAllAccountNumbers();
 
-        secureAccountService.withdraw(1, 50);
-    }
+		assertThat(allAccounts, notNullValue());
+		System.out.println("accountOwnerShouldGetAllAccountNumbers() method testing finished.");
+	}
 
+	@Test(expected = AccessDeniedException.class)
+	public void unAuthorizedShouldGetAllAccountNumbers() {
+		System.out.println("Starting unAuthorizedShouldGetAllAccountNumbers() method testing...");
+		authenticateWithAuthorities(AuthorityUtils.NO_AUTHORITIES);
 
-    @Test
-    public void accountOwnerShouldTransfer() {
-        List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ACCOUNT_OWNER");
-        authenticateWithAuthorities(authorities);
+		secureAccountService.getAllAccountNumbers();
+		System.out.println("unAuthorizedShouldGetAllAccountNumbers() method testing finished.");
+	}
 
-        secureAccountService.transfer(1, 2, 10);
-    }
-
-
-    @Test(expected = AccessDeniedException.class)
-    public void unAuthorizedShouldNotTransfer() {
-        authenticateWithAuthorities(AuthorityUtils.NO_AUTHORITIES);
-
-        secureAccountService.transfer(1, 2, 10);
-    }
-
-
-    @Test
-    public void accountOwnerShouldGetAllAccountNumbers() {
-        List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ACCOUNT_OWNER");
-        authenticateWithAuthorities(authorities);
-
-        List<Integer> allAccounts = secureAccountService.getAllAccountNumbers();
-
-        assertThat(allAccounts, notNullValue());
-    }
-
-
-    @Test(expected = AccessDeniedException.class)
-    public void unAuthorizedShouldGetAllAccountNumbers() {
-        authenticateWithAuthorities(AuthorityUtils.NO_AUTHORITIES);
-
-        secureAccountService.getAllAccountNumbers();
-    }
-
-
-    private void authenticateWithAuthorities(List<GrantedAuthority> authorities) {
-        TestingAuthenticationToken authenticationToken = new TestingAuthenticationToken("name", "password", authorities);
-        authenticationToken.setAuthenticated(true);
-        SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-    }
+	private void authenticateWithAuthorities(List<GrantedAuthority> authorities) {
+		TestingAuthenticationToken authenticationToken = new TestingAuthenticationToken("name", "password",
+				authorities);
+		authenticationToken.setAuthenticated(true);
+		SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+	}
 }

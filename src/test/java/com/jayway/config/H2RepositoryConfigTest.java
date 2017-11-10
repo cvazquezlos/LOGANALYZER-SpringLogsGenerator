@@ -18,27 +18,33 @@ import static org.junit.Assert.assertNotNull;
 @ActiveProfiles("h2")
 public class H2RepositoryConfigTest {
 
-    @Autowired
-    DataSource dataSource;
+	@Autowired
+	DataSource dataSource;
 
-    @Autowired
-    EntityManagerFactory entityManagerFactory;
+	@Autowired
+	EntityManagerFactory entityManagerFactory;
 
-    @Autowired
-    PlatformTransactionManager transactionManager;
+	@Autowired
+	PlatformTransactionManager transactionManager;
 
-    @Test
-    public void createsDataSource() {
-        assertNotNull(dataSource);
-    }
+	@Test
+	public void createsDataSource() {
+		System.out.println("Starting createsDataSource() method testing...");
+		assertNotNull(dataSource);
+		System.out.println("createsDataSource() method testing finished.");
+	}
 
-    @Test
-    public void createsEntityManagerFactory() {
-        assertNotNull(entityManagerFactory);
-    }
+	@Test
+	public void createsEntityManagerFactory() {
+		System.out.println("Starting createsEntityManagerFactory() method testing...");
+		assertNotNull(entityManagerFactory);
+		System.out.println("createsEntityManagerFactory() method testing finished.");
+	}
 
-    @Test
-    public void createsTransactionManager() {
-        assertNotNull(transactionManager);
-    }
+	@Test
+	public void createsTransactionManager() {
+		System.out.println("Starting createsTransactionManager() method testing...");
+		assertNotNull(transactionManager);
+		System.out.println("createsTransactionManager() method testing finished.");
+	}
 }

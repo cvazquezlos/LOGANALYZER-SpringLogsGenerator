@@ -53,43 +53,52 @@ public class AccountServiceImplTest {
 
     @Test
     public void shouldGetAccount() {
+		System.out.println("Starting shouldGetAccount() method testing...");
         Account account = accountService.get(1);
 
         assertThat(account.getAccountNumber(), is(1));
         assertThat(account.getBalance(), is(100));
+		System.out.println("shouldGetAccount() method testing finished.");
     }
 
 
     @Test(expected = UnknownAccountException.class)
     public void shouldThrowExceptionForFindingUnknownAccountNumber() {
+		System.out.println("Starting shouldThrowExceptionForFindingUnknownAccountNumber() method testing...");
         accountService.get(-1);
+		System.out.println("shouldThrowExceptionForFindingUnknownAccountNumber() method testing finished.");
     }
 
 
     @Test
     public void shouldDeposit() {
+		System.out.println("Starting shouldDeposit() method testing...");
         accountService.deposit(1, 100);
 
         entityManager.flush();
 
         int balance = getBalance(1);
         assertThat(balance, is(200));
+		System.out.println("shouldDeposit() method testing finished.");
     }
 
 
     @Test
     public void shouldWithdraw() {
+		System.out.println("Starting shouldWithdraw() method testing...");
         accountService.withdraw(1, 50);
 
         entityManager.flush();
 
         int balance = getBalance(1);
         assertThat(balance, is(50));
+		System.out.println("shouldWithdraw() method testing finished.");
     }
 
 
     @Test
     public void shouldNotOverdraw() {
+		System.out.println("Starting shouldNotOverdraw() method testing...");
         try {
             accountService.withdraw(1, 200);
             entityManager.flush();
@@ -100,11 +109,13 @@ public class AccountServiceImplTest {
 
         int balance = getBalance(1);
         assertThat(balance, is(100));
+		System.out.println("shouldNotOverdraw() method testing finished.");
     }
 
 
     @Test
     public void shouldTransfer() {
+		System.out.println("Starting shouldTransfer() method testing...");
         accountService.transfer(1, 2, 10);
         entityManager.flush();
 
@@ -113,11 +124,13 @@ public class AccountServiceImplTest {
 
         int secondBalance = getBalance(2);
         assertThat(secondBalance, is(210));
+		System.out.println("shouldTransfer() method testing finished.");
     }
 
 
     @Test
     public void shouldNotTransferIfOverdraw() {
+		System.out.println("Starting shouldNotTransferIfOverdraw() method testing...");
         try {
             accountService.transfer(1, 2, 200);
             entityManager.flush();
@@ -131,11 +144,13 @@ public class AccountServiceImplTest {
 
         int secondBalance = getBalance(2);
         assertThat(secondBalance, is(200));
+		System.out.println("shouldNotTransferIfOverdraw() method testing finished.");
     }
 
 
     @Test
     public void shouldNotTransferFromUnknownAccount() {
+		System.out.println("Starting shouldNotTransferFromUnknownAccount() method testing...");
         try {
             accountService.transfer(-1, 2, 50);
             entityManager.flush();
@@ -146,11 +161,13 @@ public class AccountServiceImplTest {
 
         int secondBalance = getBalance(2);
         assertThat(secondBalance, is(200));
+		System.out.println("shouldNotTransferFromUnknownAccount() method testing finished.");
     }
 
 
     @Test
     public void shouldNotTransferToUnknownAccount() {
+		System.out.println("Starting shouldNotTransferToUnknownAccount() method testing...");
         try {
             accountService.transfer(1, -2, 50);
             entityManager.flush();
@@ -161,20 +178,25 @@ public class AccountServiceImplTest {
 
         int balance = getBalance(1);
         assertThat(balance, is(100));
+		System.out.println("shouldNotTransferToUnknownAccount() method testing finished.");
     }
 
 
     @Test
     public void shouldGetAllAccountNumbers() {
+		System.out.println("Starting shouldGetAllAccountNumbers() method testing...");
         List<Integer> allAccounts = accountService.getAllAccountNumbers();
 
         assertThat(allAccounts, hasItems(1, 2));
+		System.out.println("shouldGetAllAccountNumbers() method testing finished.");
     }
 
 
     @Test(expected = UnknownAccountException.class)
     public void shouldThrowExceptionWhenDeletingUnknownAccountNumber() {
+		System.out.println("Starting shouldThrowExceptionWhenDeletingUnknownAccountNumber() method testing...");
         accountService.deleteAccount(-1);
+		System.out.println("shouldThrowExceptionWhenDeletingUnknownAccountNumber() method testing finished.");
     }
 
 
