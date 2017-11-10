@@ -16,7 +16,11 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Embeddable
 public class Address implements Serializable {
 
-    @NotEmpty
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@NotEmpty
     private String street;
     private String houseNumber;
     private String boxNumber;

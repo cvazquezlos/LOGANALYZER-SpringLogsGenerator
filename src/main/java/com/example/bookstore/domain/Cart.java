@@ -17,7 +17,11 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 public class Cart implements Serializable {
 
-    private Map<Book, Integer> books = new HashMap<Book, Integer>();
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Map<Book, Integer> books = new HashMap<Book, Integer>();
 
     public Map<Book, Integer> getBooks() {
         return Collections.unmodifiableMap(this.books);

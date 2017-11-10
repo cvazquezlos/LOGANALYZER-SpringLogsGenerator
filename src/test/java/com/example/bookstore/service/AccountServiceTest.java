@@ -1,6 +1,6 @@
 package com.example.bookstore.service;
 
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import org.junit.After;
 import org.junit.Before;

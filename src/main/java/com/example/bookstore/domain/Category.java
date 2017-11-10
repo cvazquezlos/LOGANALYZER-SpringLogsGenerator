@@ -23,7 +23,12 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Cache(region = "categories", usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Category implements Serializable {
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 

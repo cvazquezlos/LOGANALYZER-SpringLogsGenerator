@@ -29,7 +29,12 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Entity
 public class Account implements Serializable {
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 

@@ -21,6 +21,7 @@ import com.example.bookstore.domain.OrderDetail;
  * 
  * 
  */
+@SuppressWarnings("deprecation")
 public class OrderExcelView extends AbstractJExcelView {
 
     @Override

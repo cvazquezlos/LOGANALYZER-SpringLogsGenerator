@@ -6,8 +6,6 @@ import java.util.TreeMap;
 
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,8 +34,6 @@ import com.example.bookstore.validation.OrderValidator;
 @SessionAttributes(types = { Order.class })
 @RequestMapping("/cart/checkout")
 public class CheckoutController {
-
-    private final Logger logger = LoggerFactory.getLogger(CheckoutController.class);
 
     @Autowired
     private Cart cart;
