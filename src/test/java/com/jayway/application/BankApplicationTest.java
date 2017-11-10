@@ -27,128 +27,105 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {WebConfig.class, ApplicationConfig.class})
-@ActiveProfiles({"h2", "disableSecurity"})
+@ContextConfiguration(classes = { WebConfig.class, ApplicationConfig.class })
+@ActiveProfiles({ "h2", "disableSecurity" })
 @WebAppConfiguration
 @Transactional
 public class BankApplicationTest {
 
-    @Autowired
-    WebApplicationContext webApplicationContext;
+	@Autowired
+	WebApplicationContext webApplicationContext;
 
-    MockMvc mockMvc;
+	MockMvc mockMvc;
 
+	@Before
+	public void setup() {
+		mockMvc = webAppContextSetup(webApplicationContext).build();
+	}
 
-    @Before
-    public void setup() {
-        mockMvc = webAppContextSetup(webApplicationContext).build();
-    }
+	@Test
+	public void shouldPrint() throws Exception {
+		System.out.println("Starting shouldPrint() method testing...");
+		mockMvc.perform(get("/accounts/1").accept(MediaType.APPLICATION_JSON)).andDo(MockMvcResultHandlers.print());
+		System.out.println("shouldPrint() method testing finished.");
+	}
 
+	@Test
+	public void shouldGetAccount() throws Exception {
+		System.out.println("Starting shouldGetAccount() method testing...");
+		mockMvc.perform(get("/accounts/1").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
+				.andExpect(jsonPath("accountNumber").value(1)).andExpect(jsonPath("balance").value(100));
+		System.out.println("shouldGetAccount() method testing finished.");
+	}
 
-    @Test
-    public void shouldPrint() throws Exception {
-        mockMvc
-                .perform(get("/accounts/1")
-                        .accept(MediaType.APPLICATION_JSON))
-                .andDo(MockMvcResultHandlers.print());
-    }
+	@Test
+	public void shouldGetAllAccounts() throws Exception {
+		System.out.println("Starting shouldGetAllAccounts() method testing...");
+		mockMvc.perform(get("/accounts").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON)).andExpect(jsonPath("[0]").value(1))
+				.andExpect(jsonPath("[1]").value(2));
+		System.out.println("shouldGetAllAccounts() method testing finished.");
+	}
 
+	@Test
+	public void shouldDepositToAccount() throws Exception {
+		System.out.println("Starting shouldDepositToAccount() method testing...");
+		Map<String, Integer> body = Collections.singletonMap("amount", 50);
+		String json = toJsonString(body);
 
-    @Test
-    public void shouldGetAccount() throws Exception {
-        mockMvc
-                .perform(get("/accounts/1")
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("accountNumber").value(1))
-                .andExpect(jsonPath("balance").value(100));
-    }
+		mockMvc.perform(post("/accounts/1/deposit").contentType(MediaType.APPLICATION_JSON).content(json))
+				.andExpect(status().isNoContent());
+		System.out.println("shouldDepositToAccount() method testing finished.");
+	}
 
+	@Test
+	public void shouldDeleteAccount() throws Exception {
+		System.out.println("Starting shouldDeleteAccount() method testing...");
+		mockMvc.perform(delete("/accounts/1")).andExpect(status().isNoContent());
+		System.out.println("shouldDeleteAccount() method testing finished.");
+	}
 
-    @Test
-    public void shouldGetAllAccounts() throws Exception {
-        mockMvc
-                .perform(get("/accounts")
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("[0]").value(1))
-                .andExpect(jsonPath("[1]").value(2));
-    }
+	@Test
+	public void shouldNotDepositNegativeAmount() throws Exception {
+		System.out.println("Starting shouldNotDepositNegativeAmount() method testing...");
+		Map<String, Integer> body = Collections.singletonMap("amount", -50);
+		String json = toJsonString(body);
 
+		mockMvc.perform(post("/accounts/1/deposit").contentType(MediaType.APPLICATION_JSON).content(json))
+				.andExpect(status().isBadRequest());
+		System.out.println("shouldNotDepositNegativeAmount() method testing finished.");
+	}
 
-    @Test
-    public void shouldDepositToAccount() throws Exception {
-        Map<String, Integer> body = Collections.singletonMap("amount", 50);
-        String json = toJsonString(body);
+	@Test
+	public void shouldWithdrawFromAccount() throws Exception {
+		System.out.println("Starting shouldWithdrawFromAccount() method testing...");
+		Map<String, Integer> body = Collections.singletonMap("amount", 50);
+		String json = toJsonString(body);
 
-        mockMvc
-                .perform(post("/accounts/1/deposit")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(json))
-                .andExpect(status().isNoContent());
-    }
+		mockMvc.perform(post("/accounts/1/withdraw").accept(MediaType.APPLICATION_JSON)
+				.contentType(MediaType.APPLICATION_JSON).content(json)).andExpect(status().isOk())
+				.andExpect(jsonPath("accountNumber", is(1))).andExpect(jsonPath("balance", is(50)));
+		System.out.println("shouldWithdrawFromAccount() method testing finished.");
+	}
 
+	@Test
+	public void shouldNotWithdrawNegativeAmount() throws Exception {
+		System.out.println("Starting shouldGetAllAccounts() method testing...");
+		Map<String, Integer> body = Collections.singletonMap("amount", -50);
+		String json = toJsonString(body);
 
-    @Test
-    public void shouldDeleteAccount() throws Exception {
-        mockMvc
-                .perform(delete("/accounts/1"))
-                .andExpect(status().isNoContent());
-    }
+		mockMvc.perform(post("/accounts/1/withdraw").accept(MediaType.APPLICATION_JSON)
+				.contentType(MediaType.APPLICATION_JSON).content(json)).andExpect(status().isBadRequest());
+		System.out.println("shouldNotWithdrawNegativeAmount() method testing finished.");
+	}
 
-
-    @Test
-    public void shouldNotDepositNegativeAmount() throws Exception {
-        Map<String, Integer> body = Collections.singletonMap("amount", -50);
-        String json = toJsonString(body);
-
-        mockMvc
-                .perform(post("/accounts/1/deposit")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(json))
-                .andExpect(status().isBadRequest());
-    }
-
-
-    @Test
-    public void shouldWithdrawFromAccount() throws Exception {
-        Map<String, Integer> body = Collections.singletonMap("amount", 50);
-        String json = toJsonString(body);
-
-        mockMvc
-                .perform(post("/accounts/1/withdraw")
-                        .accept(MediaType.APPLICATION_JSON)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(json))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("accountNumber", is(1)))
-                .andExpect(jsonPath("balance", is(50)));
-    }
-
-
-    @Test
-    public void shouldNotWithdrawNegativeAmount() throws Exception {
-        Map<String, Integer> body = Collections.singletonMap("amount", -50);
-        String json = toJsonString(body);
-
-        mockMvc
-                .perform(post("/accounts/1/withdraw")
-                        .accept(MediaType.APPLICATION_JSON)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(json))
-                .andExpect(status().isBadRequest());
-    }
-
-
-    private static String toJsonString(Map<String, ?> map) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            return objectMapper.writeValueAsString(map);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-    }
+	private static String toJsonString(Map<String, ?> map) {
+		ObjectMapper objectMapper = new ObjectMapper();
+		try {
+			return objectMapper.writeValueAsString(map);
+		} catch (JsonProcessingException e) {
+			throw new RuntimeException(e);
+		}
+	}
 }
-
