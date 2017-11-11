@@ -9,6 +9,7 @@
 	<packaging>war</packaging>
 
 	<properties>
+    	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<springVersion>4.1.7.RELEASE</springVersion>
 		<tilesVersion>2.2.1</tilesVersion>
 		<hibernateVersion>4.1.9.Final</hibernateVersion>
