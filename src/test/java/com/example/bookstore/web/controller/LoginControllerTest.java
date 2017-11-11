@@ -2,6 +2,8 @@ package com.example.bookstore.web.controller;
 
 import static org.junit.Assert.*;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,12 +19,15 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.example.bookstore.domain.Account;
 import com.example.bookstore.domain.support.AccountBuilder;
+import com.example.bookstore.repository.JpaBookRepositoryTest;
 import com.example.bookstore.service.AccountService;
 import com.example.bookstore.service.AuthenticationException;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
 public class LoginControllerTest {
+
+	private static final Logger logger = LogManager.getLogger(JpaBookRepositoryTest.class.getName());
 
     @Autowired
     private LoginController loginController;
@@ -50,6 +55,7 @@ public class LoginControllerTest {
 
     @Test
     public void testHandleLogin() throws AuthenticationException {
+    	System.out.println("Starting testHandleLogin() method test...");
 
         MockHttpSession mockHttpSession = new MockHttpSession();
         mockHttpSession.setAttribute(LoginController.REQUESTED_URL, "someUrl");
@@ -59,9 +65,13 @@ public class LoginControllerTest {
         Account account = (Account) mockHttpSession.getAttribute(LoginController.ACCOUNT_ATTRIBUTE);
 
         assertNotNull(account);
+        logger.info(account.toString() + " can't be null.");
         assertEquals("John", account.getFirstName());
+        logger.info("John first name must be John");
         assertEquals("Doe", account.getLastName());
+        logger.info("Doe first name must be Doe");
         assertNull(mockHttpSession.getAttribute(LoginController.REQUESTED_URL));
+        logger.info("mockHttpSession is not null as expected.");
         assertEquals("redirect:someUrl", view);
 
         // Test the different view selection choices
@@ -73,6 +83,7 @@ public class LoginControllerTest {
         mockHttpSession.setAttribute(LoginController.REQUESTED_URL, "abclogindef");
         view = this.loginController.handleLogin("john", "secret", mockHttpSession);
         assertEquals("redirect:/index.htm", view);
+    	System.out.println("testHandleLogin() method test finished...");
     }
 
     @Configuration
