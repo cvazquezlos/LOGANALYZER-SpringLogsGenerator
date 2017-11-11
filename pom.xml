@@ -9,7 +9,7 @@
 	<packaging>war</packaging>
 
 	<properties>
-    	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<springVersion>4.1.7.RELEASE</springVersion>
 		<tilesVersion>2.2.1</tilesVersion>
 		<hibernateVersion>4.1.9.Final</hibernateVersion>
@@ -25,7 +25,7 @@
 		<javax.servlet-api-version>3.1.0</javax.servlet-api-version>
 		<jstl-version>1.2</jstl-version>
 		<mockito-all-version>2.0.2-beta</mockito-all-version>
-		<log4j-version>1.2.17</log4j-version>
+		<log4j-version>2.8.2</log4j-version>
 		<slf4j-api-version>1.7.12</slf4j-api-version>
 	</properties>
 	<build>
@@ -179,19 +179,14 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
 			<version>${log4j-version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>${slf4j-api-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-simple</artifactId>
-			<version>${slf4j-api-version}</version>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>${log4j-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.tiles</groupId>
@@ -218,9 +213,20 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-		        <groupId>xml-apis</groupId>
-		        <artifactId>xml-apis</artifactId>
-		        <version>1.4.01</version>
-        	</dependency>
+			<groupId>xml-apis</groupId>
+			<artifactId>xml-apis</artifactId>
+			<version>1.4.01</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j-api-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>${slf4j-api-version}</version>
+		</dependency>
 	</dependencies>
 </project>

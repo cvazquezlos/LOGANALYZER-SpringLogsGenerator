@@ -112,3 +112,41 @@
 2017-11-11 12:24:48 [INFO ] java.sql.DatabaseMetaData - HHH000262: Table not found: Role_Permission
 2017-11-11 12:24:48 [INFO ] java.sql.DatabaseMetaData - HHH000262: Table not found: orders
 2017-11-11 12:24:48 [INFO ] org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000232: Schema update complete
+2017-11-11 12:28:41 [INFO ] org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {4.0.1.Final}
+2017-11-11 12:28:41 [INFO ] org.hibernate.Version - HHH000412: Hibernate Core {4.1.9.Final}
+2017-11-11 12:28:41 [INFO ] org.hibernate.cfg.Environment - HHH000206: hibernate.properties not found
+2017-11-11 12:28:41 [INFO ] org.hibernate.cfg.Environment - HHH000021: Bytecode provider name : javassist
+2017-11-11 12:28:41 [INFO ] org.hibernate.ejb.Ejb3Configuration - HHH000204: Processing PersistenceUnitInfo [
+	name: bookstore
+	...]
+2017-11-11 12:28:42 [INFO ] org.hibernate.service.jdbc.connections.internal.ConnectionProviderInitiator - HHH000130: Instantiating explicit connection provider: org.hibernate.ejb.connection.InjectedDataSourceConnectionProvider
+2017-11-11 12:28:42 [INFO ] org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2017-11-11 12:28:42 [INFO ] org.hibernate.engine.transaction.internal.TransactionFactoryInitiator - HHH000268: Transaction strategy: org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory
+2017-11-11 12:28:42 [INFO ] org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory - HHH000397: Using ASTQueryTranslatorFactory
+2017-11-11 12:28:42 [INFO ] org.hibernate.cache.spi.UpdateTimestampsCache - HHH000250: Starting update timestamps cache at region: org.hibernate.cache.spi.UpdateTimestampsCache
+2017-11-11 12:28:42 [WARN ] org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory - HHH020003: Could not find a specific ehcache configuration for cache named [org.hibernate.cache.spi.UpdateTimestampsCache]; using defaults.
+2017-11-11 12:28:42 [INFO ] org.hibernate.cache.internal.StandardQueryCache - HHH000248: Starting query cache at region: org.hibernate.cache.internal.StandardQueryCache
+2017-11-11 12:28:42 [WARN ] org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory - HHH020003: Could not find a specific ehcache configuration for cache named [org.hibernate.cache.internal.StandardQueryCache]; using defaults.
+2017-11-11 12:28:42 [INFO ] org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 4.3.0.Final
+2017-11-11 12:28:43 [INFO ] org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000228: Running hbm2ddl schema update
+2017-11-11 12:28:43 [INFO ] org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000102: Fetching database metadata
+2017-11-11 12:28:43 [INFO ] org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000396: Updating schema
+2017-11-11 12:28:43 [INFO ] java.sql.DatabaseMetaData - HHH000262: Table not found: Account
+2017-11-11 12:28:43 [INFO ] java.sql.DatabaseMetaData - HHH000262: Table not found: Account_Role
+2017-11-11 12:28:43 [INFO ] java.sql.DatabaseMetaData - HHH000262: Table not found: Book
+2017-11-11 12:28:43 [INFO ] java.sql.DatabaseMetaData - HHH000262: Table not found: Category
+2017-11-11 12:28:43 [INFO ] java.sql.DatabaseMetaData - HHH000262: Table not found: OrderDetail
+2017-11-11 12:28:43 [INFO ] java.sql.DatabaseMetaData - HHH000262: Table not found: Permission
+2017-11-11 12:28:43 [INFO ] java.sql.DatabaseMetaData - HHH000262: Table not found: Role
+2017-11-11 12:28:43 [INFO ] java.sql.DatabaseMetaData - HHH000262: Table not found: Role_Permission
+2017-11-11 12:28:43 [INFO ] java.sql.DatabaseMetaData - HHH000262: Table not found: orders
+2017-11-11 12:28:43 [INFO ] java.sql.DatabaseMetaData - HHH000262: Table not found: Account
+2017-11-11 12:28:43 [INFO ] java.sql.DatabaseMetaData - HHH000262: Table not found: Account_Role
+2017-11-11 12:28:43 [INFO ] java.sql.DatabaseMetaData - HHH000262: Table not found: Book
+2017-11-11 12:28:43 [INFO ] java.sql.DatabaseMetaData - HHH000262: Table not found: Category
+2017-11-11 12:28:43 [INFO ] java.sql.DatabaseMetaData - HHH000262: Table not found: OrderDetail
+2017-11-11 12:28:43 [INFO ] java.sql.DatabaseMetaData - HHH000262: Table not found: Permission
+2017-11-11 12:28:43 [INFO ] java.sql.DatabaseMetaData - HHH000262: Table not found: Role
+2017-11-11 12:28:43 [INFO ] java.sql.DatabaseMetaData - HHH000262: Table not found: Role_Permission
+2017-11-11 12:28:43 [INFO ] java.sql.DatabaseMetaData - HHH000262: Table not found: orders
+2017-11-11 12:28:43 [INFO ] org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000232: Schema update complete

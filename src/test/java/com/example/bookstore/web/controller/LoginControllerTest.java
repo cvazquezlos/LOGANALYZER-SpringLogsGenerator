@@ -65,7 +65,7 @@ public class LoginControllerTest {
         Account account = (Account) mockHttpSession.getAttribute(LoginController.ACCOUNT_ATTRIBUTE);
 
         assertNotNull(account);
-        logger.info(account.toString() + " can't be null.");
+        logger.info(account.toString().replaceAll("\n", " ").replaceAll("\r", " ") + " can't be null.");
         assertEquals("John", account.getFirstName());
         logger.info("John first name must be John");
         assertEquals("Doe", account.getLastName());

@@ -96,7 +96,7 @@ public class JpaBookRepositoryTest {
 			assertEquals(this.book.getAuthor(), book.getAuthor());
 			assertEquals(this.book.getDescription(), book.getDescription());
 			assertEquals(this.book.getIsbn(), book.getIsbn());
-			logger.info("Resource found: " + this.book.toString());
+			logger.info("Resource found: " + this.book.toString().replaceAll("\n", " ").replaceAll("\r", " "));
 		}
 		System.out.println("testFindByCategory() method test finished...");
 	}
@@ -116,7 +116,7 @@ public class JpaBookRepositoryTest {
 		}.build();
 		
 		bookRepository.storeBook(book);
-		logger.info("New book stored: " + book.toString());
+		logger.info("New book stored: " + book.toString().replaceAll("\n", " ").replaceAll("\r", " "));
 		// Explicitly flush so any CUD query that is left behind is send to the
 		// database before rolling back
 		entityManager.flush();
@@ -144,7 +144,7 @@ public class JpaBookRepositoryTest {
 			assertEquals(this.book.getAuthor(), book.getAuthor());
 			assertEquals(this.book.getDescription(), book.getDescription());
 			assertEquals(this.book.getIsbn(), book.getIsbn());
-			logger.info("Concrete book found: " + this.book.toString());
+			logger.info("Concrete book found: " + this.book.toString().replaceAll("\n", " ").replaceAll("\r", " "));
 		}
 		System.out.println("testFindBooks() method test finished...");
 	}
