@@ -19,13 +19,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.example.bookstore.domain.Account;
 import com.example.bookstore.domain.support.AccountBuilder;
 import com.example.bookstore.repository.AccountRepository;
-import com.example.bookstore.repository.JpaBookRepositoryTest;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
 public class AccountServiceTest {
 
-	private static final Logger logger = LogManager.getLogger(JpaBookRepositoryTest.class.getName());
+	private static final Logger logger = LogManager.getLogger(AccountServiceTest.class.getName());
 
     @Autowired
     private AccountService accountService;

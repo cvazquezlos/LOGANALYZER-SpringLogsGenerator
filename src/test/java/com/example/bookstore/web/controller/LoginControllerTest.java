@@ -19,7 +19,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.example.bookstore.domain.Account;
 import com.example.bookstore.domain.support.AccountBuilder;
-import com.example.bookstore.repository.JpaBookRepositoryTest;
 import com.example.bookstore.service.AccountService;
 import com.example.bookstore.service.AuthenticationException;
 
@@ -27,7 +26,7 @@ import com.example.bookstore.service.AuthenticationException;
 @ContextConfiguration
 public class LoginControllerTest {
 
-	private static final Logger logger = LogManager.getLogger(JpaBookRepositoryTest.class.getName());
+	private static final Logger logger = LogManager.getLogger(LoginControllerTest.class.getName());
 
     @Autowired
     private LoginController loginController;
