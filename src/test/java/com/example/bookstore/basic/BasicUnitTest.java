@@ -33,7 +33,7 @@ public class BasicUnitTest {
 	public void testDeleteQuery() {
 		System.out.println("Starting testDeleteQuery() method test...");
 		assertEquals(1, dummyDao.find("test0").size());
-		logger.info("Database must contain target value.");
+		logger.info("Database must contain any target value.");
 		dummyDao.delete("test0");
 		assertEquals(19, database.size());
 		logger.info("After deleting info, database size have to be 19.");
