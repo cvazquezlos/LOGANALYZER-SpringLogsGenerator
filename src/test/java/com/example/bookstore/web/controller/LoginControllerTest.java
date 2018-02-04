@@ -54,7 +54,7 @@ public class LoginControllerTest {
 
     @Test
     public void testHandleLogin() throws AuthenticationException {
-    	System.out.println("Starting testHandleLogin() method test...");
+    	System.out.println("\nStarting testHandleLogin() method test...");
 
         MockHttpSession mockHttpSession = new MockHttpSession();
         mockHttpSession.setAttribute(LoginController.REQUESTED_URL, "someUrl");

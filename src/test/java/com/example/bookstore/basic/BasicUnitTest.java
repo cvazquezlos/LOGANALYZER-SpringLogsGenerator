@@ -31,7 +31,8 @@ public class BasicUnitTest {
 
 	@Test
 	public void testDeleteQuery() {
-		System.out.println("Starting testDeleteQuery() method test...");
+		System.out.println("\nStarting testDeleteQuery() method test...");
+		logger.info("Database can't be null.");
 		assertEquals(1, dummyDao.find("test0").size());
 		logger.info("Database must contain any target value.");
 		dummyDao.delete("test0");
@@ -44,7 +45,7 @@ public class BasicUnitTest {
 
 	@Test
 	public void testAddQuery() {
-		System.out.println("Starting testAddQuery() method test...");
+		System.out.println("\nStarting testAddQuery() method test...");
 		assertEquals(0, dummyDao.find("test20").size());
 		logger.info("Database can't contain target value.");
 		dummyDao.add("test20");
@@ -57,7 +58,7 @@ public class BasicUnitTest {
 
 	@Test
 	public void testFindQuery() {
-		System.out.println("Starting testFindQuery() method test...");
+		System.out.println("\nStarting testFindQuery() method test...");
 		List<String> results = dummyDao.find("2");
 		assertEquals(2, results.size());
 		for (String result : results) {

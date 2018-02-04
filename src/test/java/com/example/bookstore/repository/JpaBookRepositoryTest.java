@@ -71,7 +71,7 @@ public class JpaBookRepositoryTest {
 
 	@Test
 	public void testFindById() {
-		System.out.println("Starting testFindById() method test...");
+		System.out.println("\nStarting testFindById() method test...");
 		entityManager.flush();
 		logger.info("After repository has been initialized, it must find the target value.");
 		Book book = bookRepository.findById(this.book.getId());
@@ -86,7 +86,7 @@ public class JpaBookRepositoryTest {
 
 	@Test
 	public void testFindByCategory() {
-		System.out.println("Starting testFindByCategory() method test...");
+		System.out.println("\nStarting testFindByCategory() method test...");
 		setupData();
 		List<Book> books = bookRepository.findByCategory(category);
 		assertEquals(1, books.size());
@@ -104,7 +104,7 @@ public class JpaBookRepositoryTest {
 	@Test
 	@Rollback(true)
 	public void testStoreBook() {
-		System.out.println("Starting testStoreBook() method test...");
+		System.out.println("\nStarting testStoreBook() method test...");
 		Book book = new BookBuilder() {
 			{
 				description("Something");
@@ -134,7 +134,7 @@ public class JpaBookRepositoryTest {
 
 	@Test
 	public void testFindBooks() {
-		System.out.println("Starting testFindBooks() method test...");
+		System.out.println("\nStarting testFindBooks() method test...");
 		BookSearchCriteria bookSearchCriteria = new BookSearchCriteria();
 		bookSearchCriteria.setTitle(book.getTitle());
 		List<Book> books = bookRepository.findBooks(bookSearchCriteria);
@@ -151,7 +151,7 @@ public class JpaBookRepositoryTest {
 
 	@Test
 	public void testFindRandom() {
-		System.out.println("Starting testFindRandom() method test...");
+		System.out.println("\nStarting testFindRandom() method test...");
 		List<Book> books = bookRepository.findRandom(0);
 		assertTrue(books.size() != 0);
 		logger.info("Random books found.");

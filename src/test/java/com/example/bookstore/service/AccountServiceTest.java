@@ -53,7 +53,7 @@ public class AccountServiceTest {
 
     @Test(expected = AuthenticationException.class)
     public void testLoginFailure() throws AuthenticationException {
-    	System.out.println("Starting testLoginFailure() method test...");
+    	System.out.println("\nStarting testLoginFailure() method test...");
         accountService.login("john", "fail");
         logger.info("Login failed as expected.");
     	System.out.println("testLoginFailure() method test finished...");
@@ -61,7 +61,7 @@ public class AccountServiceTest {
 
     @Test()
     public void testLoginSuccess() throws AuthenticationException {
-    	System.out.println("Starting testLoginSuccess() method test...");
+    	System.out.println("\nStarting testLoginSuccess() method test...");
         Account account = accountService.login("john", "secret");
         assertEquals("John", account.getFirstName());
         logger.info("John login success.");
